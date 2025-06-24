@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.env
+*.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Static & media (if collected)
+staticfiles/
+static/
+media/
+
+# Env files
+.env
+.env.*
+
+# Coverage & test
+.coverage
+htmlcov/
+*.cover
+*.log
+coverage.xml
+*.pytest_cache/
+.pytest_cache/
+
+# Git
+*.orig
