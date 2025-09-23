@@ -16,7 +16,7 @@ IT-Dictioanry — это REST API для работы с терминологи�
 
 ```bash
 # Клонируем проект
-git clone <repo-url>
+git clone https://github.com/DovletEmin/IT-Dictionary.git
 cd IT-Dictionary
 
 # Создаем виртуальное окружение
