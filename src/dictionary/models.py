@@ -1,4 +1,6 @@
 from django.db import models
+import openpyxl
+
 
 class Term(models.Model):
     english = models.CharField(max_length=255)
@@ -19,4 +21,30 @@ class Term(models.Model):
         verbose_name_plural = "Terms"
 
         def __str__(self):
-            return self.english
+            return self.id, self.english
+        
+
+class ExcelImport(models.Model):
+    file = models.FileField(upload_to="imports/")
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        wb = openpyxl.load_workbook(self.file.path)
+        sheet = wb.active
+
+        for row in sheet.iter_rows(min_row=2, values_only=True):
+            english, abbreviation, category, russian, turkmen, description_en, description_ru, description_tm = row
+
+            Term.objects.update_or_create(
+                english=english,
+                defaults = {
+                    "abbreviation": abbreviation,
+                    "category": category,
+                    "russian": russian,
+                    "turkmen": turkmen,
+                    "description_en": description_en,
+                    "description_ru": description_ru,
+                    "description_tm": description_tm,
+                },
+            )
