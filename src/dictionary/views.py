@@ -38,10 +38,14 @@ class CategorySerializer(serializers.Serializer):
 
 class CategoriesView(APIView):
     def get(self, request):
-        categories = Term.objects.exclude(category="").order_by("category").values_list("category", flat=True).distinct()
-        data = [{"category": c} for c in categories]
-        serializer = CategorySerializer(data, many=True)
-        return Response(serializer.data)
+        categories = (
+            Term.objects
+            .exclude(category="")
+            .order_by("category")
+            .values_list("category", flat=True)
+            .distinct()
+        )
+        return Response(list(categories))
 
 class TermsCountSerializer(serializers.Serializer):
     count = serializers.IntegerField()
